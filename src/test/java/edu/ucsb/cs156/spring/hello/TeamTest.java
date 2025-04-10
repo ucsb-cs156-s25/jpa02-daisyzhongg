@@ -1,19 +1,27 @@
 package edu.ucsb.cs156.spring.hello;
 
+import org.apache.logging.log4j.spi.ThreadContextMap2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class TeamTest {
 
     Team team;
     Team team1;
+    Team team2;
+    Team team3;
+
 
     @BeforeEach
     public void setup() {
         team = new Team("test-team");  
-        team1 = new Team("new-test");  
+        team1 = new Team("new-test");
+        team2 = new Team("test");  
+        team3 = new Team("test");
+        team2.addMember("1");  
+        team3.addMember("2");  
     }
 
     @Test
@@ -42,6 +50,12 @@ public class TeamTest {
     @Test
     public void testObject_equal(){
         assertFalse(team.equals(1));
+    }
+
+    @Test
+    public void name_equal(){
+        assert(team.equals(team));
+        assert(!(team2.equals(team3)));
     }
 
     @Test
